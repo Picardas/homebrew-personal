@@ -1,0 +1,44 @@
+name: Bump casks on schedule or request
+
+on:
+  workflow_dispatch:
+    inputs:
+      casks:
+        description: Custom list of casks to livecheck and bump if outdated
+        required: false
+  schedule:
+    # Every day at 00:23
+    - cron: "23 0 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  autobump:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Configure Git user
+        uses: Homebrew/actions/git-user-config@main
+        with:
+          username: Picardas-Bot
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+
+      - name: Set up commit signing
+        uses: Homebrew/actions/setup-commit-signing@main
+        with:
+          signing_key: ${{ secrets.BOT_SSH_SIGNING_KEY }}
+
+      - name: Bump packages
+        id: bump
+        uses: Homebrew/actions/bump-packages@main
+        with:
+          token: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+          casks: >
+            picardas-git-credential-manager
+          fork: false
