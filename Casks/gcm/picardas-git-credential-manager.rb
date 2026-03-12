@@ -1,5 +1,5 @@
 cask "picardas-git-credential-manager" do
-  arch arm: "arm64", intel: "x86"
+  arch arm: "arm64", intel: "x64"
 
   version "2.7.0"
   sha256 arm:   "3f2797131f0857044efc2f7d3367cf04890d55c97f1301d8f5105babf8da78ea",
