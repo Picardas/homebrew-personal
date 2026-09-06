@@ -2,8 +2,7 @@ cask "picardas-git-credential-manager" do
   version "2.9.1"
   sha256 "2ac8f99258d04acb45cf592eb5b06ec0e0760c329bce40a4d18dabb5e0e37f68"
 
-  url "https://github.com/git-ecosystem/git-credential-manager/releases/download/v#{version.major_minor_patch}/gcm-osx-arm64-#{version.major_minor_patch}.tar.gz",
-      verified: "github.com/git-ecosystem/git-credential-manager/"
+  url "https://github.com/git-ecosystem/git-credential-manager/releases/download/v#{version.major_minor_patch}/gcm-osx-arm64-#{version.major_minor_patch}.tar.gz"
   name "Git Credential Manager"
   desc "Cross-platform Git credential storage for multiple hosting providers"
   homepage "https://aka.ms/gcm"
@@ -17,10 +16,9 @@ cask "picardas-git-credential-manager" do
 
   binary "git-credential-manager"
 
-  postflight do
-    FileUtils.chmod "+x", "#{staged_path}/git-credential-manager"
-    system_command "#{staged_path}/git-credential-manager",
-                   args: ["configure"]
+  postflight_steps do
+    set_permissions "git-credential-manager", "+x"
+    run "git-credential-manager", base: :staged_path, args: ["configure"]
   end
 
   uninstall script: {
