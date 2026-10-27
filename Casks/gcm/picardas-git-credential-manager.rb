@@ -1,6 +1,6 @@
 cask "picardas-git-credential-manager" do
-  version "3.0.1"
-  sha256 "d285292475efe756e12a572a51a59cf6dd90edd562a77f5f64edd3636be4486e"
+  version "3.0.2"
+  sha256 "2031e8f81683ff0bd835a762e6cfd0831e9d28cdd5a55b10135c73e9498750cc"
 
   url "https://github.com/git-ecosystem/git-credential-manager/releases/download/v#{version.major_minor_patch}/gcm-osx-arm64-#{version.major_minor_patch}.tar.gz"
   name "Git Credential Manager"
